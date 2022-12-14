@@ -46,9 +46,9 @@ def get_delete_put_state(state_id: str):
         if not data:
             abort(400, 'Not a JSON')
 
-        data.pop('id')
-        data.pop('created_at')
-        data.pop('updated_at')
+        data.pop('id', None)
+        data.pop('created_at', None)
+        data.pop('updated_at', None)
 
         state.__dict__.update(**data)
         storage.save()
