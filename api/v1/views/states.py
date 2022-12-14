@@ -9,71 +9,48 @@ from models import storage
 from models.state import State
 
 
-@app_views.get('/states')
-def get_all_states():
-    all_states = [state.to_dict() for state in storage.all(State).values()]
+@app_views.route('/states', methods=['GET', 'POST'])
+def get_post_states():
+    if request.method == 'GET':
+        all_states = [state.to_dict() for state in storage.all(State).values()]
 
-    return all_states
-
-
-@app_views.get('/states/<state_id>')
-def get_state(state_id: str):
-    state = storage.get(State, state_id)
-
-    if state is None:
-        abort(404)
-
-    return state.to_dict()
-
-
-@app_views.delete('/states/<state_id>')
-def delete_state(state_id: str):
-    state = storage.get(State, state_id)
-
-    if state is None:
-        abort(404)
-
-    storage.delete(state)
-
-    return {}
-
-
-@app_views.post('/states')
-def create_state():
-    try:
+        return all_states
+    if request.method == 'POST':
         data = request.get_json()
-    except:
-        return {'error': 'Not a JSON'}, 400
-    try:
-        state_name = data['name']
-    except:
-        return {'error': 'Missing name'}, 400
+        if not data:
+            abort(400, 'Not a JSON')
+        try:
+            state_name = data['name']
+        except:
+            abort(400, 'Missing name')
 
-    new_state = State(name=state_name)
-    new_state.save()
+        new_state = State(name=state_name)
+        new_state.save()
 
-    return new_state.to_dict(), 201
+        return new_state.to_dict(), 201
 
 
-@app_views.put('/states/<state_id>')
-def update_state(state_id: str):
+@app_views.route('/states/<state_id>', methods=['GET', 'PUT', 'DELETE'])
+def get_delete_put_state(state_id: str):
     state = storage.get(State, state_id)
-
     if state is None:
         abort(404)
 
-    try:
+    if request.method == 'GET':
+        return state.to_dict()
+    elif request.method == 'DELETE':
+        storage.delete(state)
+        return {}
+    elif request.method == 'PUT':
         data = request.get_json()
-    except:
-        return {'error': 'Not a JSON'}, 400
-    try:
-        del data['id']
-        del data['created_at']
-        del data['updated_at']
-    except:
-        pass
+        if not data:
+            abort(400, 'Not a JSON')
 
-    state.__dict__.update(data)
-    storage.save()
+        data.pop('id')
+        data.pop('created_at')
+        data.pop('updated_at')
 
-    return state.to_dict()
+        state.__dict__.update(data)
+        storage.save()
+
+        return state.to_dict()
