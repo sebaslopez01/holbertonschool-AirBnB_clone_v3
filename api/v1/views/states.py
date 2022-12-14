@@ -51,6 +51,6 @@ def get_delete_put_state(state_id: str):
         data.pop('updated_at', None)
 
         state.__dict__.update(data)
-        storage.save()
+        state.save()
 
         return state.to_dict()
