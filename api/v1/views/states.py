@@ -43,14 +43,14 @@ def create_state():
     try:
         data = request.get_json()
     except:
-        return {'Not a JSON'}, 400
+        return {'error': 'Not a JSON'}, 400
     try:
         state_name = data['name']
     except:
-        return {'Missing name'}, 400
+        return {'error': 'Missing name'}, 400
 
     new_state = State(name=state_name)
-    storage.new(new_state)
+    new_state.save()
 
     return new_state.to_dict(), 201
 
@@ -65,7 +65,7 @@ def update_state(state_id: str):
     try:
         data = request.get_json()
     except:
-        return {'Not a JSON'}, 400
+        return {'error': 'Not a JSON'}, 400
     try:
         del data['id']
         del data['created_at']
