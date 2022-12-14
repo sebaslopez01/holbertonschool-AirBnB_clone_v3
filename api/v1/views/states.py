@@ -3,7 +3,7 @@
 """This module defines states api actions"""
 
 
-from flask import abort, request
+from flask import abort, request, jsonify
 from api.v1.views import app_views
 from models import storage
 from models.state import State
@@ -14,7 +14,7 @@ def get_post_states():
     if request.method == 'GET':
         all_states = [state.to_dict() for state in storage.all(State).values()]
 
-        return all_states
+        return jsonify(all_states)
     if request.method == 'POST':
         data = request.get_json()
         if not data:
