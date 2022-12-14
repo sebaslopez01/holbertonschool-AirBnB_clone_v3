@@ -40,7 +40,7 @@ def get_delete_put_state(state_id: str):
         return state.to_dict()
     elif request.method == 'DELETE':
         state.delete()
-        del state
+        storage.save()
         return {}
     elif request.method == 'PUT':
         data = request.get_json()
@@ -50,10 +50,9 @@ def get_delete_put_state(state_id: str):
         data.pop('id', None)
         data.pop('created_at', None)
         data.pop('updated_at', None)
-        data.pop('__class__', None)
 
         for key, value in data.items():
-            state.__dict__[key] = value
+            setattr(state, key, value)
         state.save()
 
         return state.to_dict()
