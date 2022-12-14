@@ -29,8 +29,3 @@ def stats():
     }
 
     return models_stats
-
-
-@app_views.errorhandler(404)
-def page_not_found():
-    return {'error': 'Not found'}
