@@ -40,6 +40,7 @@ def get_delete_put_state(state_id: str):
         return state.to_dict()
     elif request.method == 'DELETE':
         state.delete()
+        del state
         return {}
     elif request.method == 'PUT':
         data = request.get_json()
