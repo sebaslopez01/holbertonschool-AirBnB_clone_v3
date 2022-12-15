@@ -10,7 +10,7 @@ from models.amenity import Amenity
 
 
 @app_views.route('/amenities', methods=['GET', 'POST'])
-def get_all_cities_by_state():
+def get_all_amenities():
     if request.method == 'GET':
         amenities = [amenity.to_dict() for amenity in storage.all(Amenity)]
         return jsonify(amenities)
@@ -31,7 +31,7 @@ def get_all_cities_by_state():
 
 
 @app_views.route('/amenities/<amenity_id>', methods=['GET', 'DELETE', 'PUT'])
-def get_delete_put_cities(amenity_id: str):
+def get_delete_put_amenities(amenity_id: str):
     amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
         abort(404)
