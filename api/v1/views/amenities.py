@@ -12,7 +12,8 @@ from models.amenity import Amenity
 @app_views.route('/amenities', methods=['GET', 'POST'])
 def get_all_amenities():
     if request.method == 'GET':
-        amenities = [amenity.to_dict() for amenity in storage.all(Amenity)]
+        amenities = [amenity.to_dict()
+                     for amenity in storage.all(Amenity).values()]
         return jsonify(amenities)
 
     if request.method == 'POST':
