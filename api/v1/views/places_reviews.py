@@ -11,7 +11,7 @@ from models.place import Place
 from models.user import User
 
 
-@app_views.route('/palces/<place_id>/reviews', methods=['GET', 'POST'])
+@app_views.route('/places/<place_id>/reviews', methods=['GET', 'POST'])
 def get_all_reviews_by_place(place_id: str):
     place = storage.get(Place, place_id)
     if place is None:

@@ -34,7 +34,7 @@ def get_all_places_by_city(city_id: str):
         if not data.get('name', None):
             abort(400, 'Missing name')
 
-        new_place = Place(data)
+        new_place = Place(**data)
         new_place.save()
 
         return new_place.to_dict(), 201
