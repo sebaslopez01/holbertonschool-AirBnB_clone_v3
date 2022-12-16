@@ -34,7 +34,7 @@ def get_all_reviews_by_place(place_id: str):
         if not data.get('text', None):
             abort(400, 'Missing text')
 
-        new_review = Review(**data)
+        new_review = Review(place_id=place_id, **data)
         new_review.save()
 
         return new_review.to_dict(), 201
