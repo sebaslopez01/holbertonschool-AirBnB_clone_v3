@@ -25,9 +25,8 @@ def get_all_places_by_city(city_id: str):
         data = request.get_json()
         if not data:
             abort(400, 'Not a JSON')
-        try:
-            user_id = data['user_id']
-        except:
+        user_id = data.get('user_id', None)
+        if not user_id:
             abort(400, 'Missing user_id')
         if storage.get(User, user_id) is None:
             abort(404)
