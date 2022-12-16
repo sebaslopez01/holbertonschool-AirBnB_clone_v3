@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-"""This module defines cities api actions"""
+"""This module defines amenities api actions"""
 
 
 from flask import abort, request, jsonify
