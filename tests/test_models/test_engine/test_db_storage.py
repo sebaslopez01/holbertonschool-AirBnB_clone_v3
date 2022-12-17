@@ -97,3 +97,15 @@ class TestDBStorage(unittest.TestCase):
         self.assertEqual(new_state, state)
 
         new_state.delete()
+
+    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+    def test_count(self):
+        new_state = State(name='California')
+        new_state.save()
+        
+        state_count = models.storage.count(State)
+
+        self.assertEqual(state_count, 1)
+
+        new_state.delete()
+
