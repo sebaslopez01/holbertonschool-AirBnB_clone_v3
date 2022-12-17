@@ -133,7 +133,7 @@ class TestFileStorage(unittest.TestCase):
 
         state_count = models.storage.count(State)
 
-        self.assertEqual(state_count, 1)
+        self.assertEqual(state_count, 2)
 
         new_state.delete()
         models.storage.save()
