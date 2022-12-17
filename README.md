@@ -154,7 +154,8 @@ EOF  all  create  destroy  help  quit  show  update
 No known bugs at this time. 
 
 ## Authors
-Sebastián López - [Github](https://github.com/sebaslopez01/) 
+Sebastián López - [Github](https://github.com/sebaslopez01/)
+
 Ricardo Montaña - [Github](https://github.com/rmbodegalibre)
 
 ## License
