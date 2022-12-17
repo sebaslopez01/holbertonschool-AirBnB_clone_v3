@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-"""This module defines app instance of Flask """
+"""This module defines app instance of Flask"""
 
 import os
 from flask import Flask
