@@ -159,4 +159,4 @@ Sebastián López - [Github](https://github.com/sebaslopez01/)
 Ricardo Montaña - [Github](https://github.com/rmbodegalibre)
 
 ## License
-Public Domain. No copy write protection. 
+No copy write protection. Public Domain.
